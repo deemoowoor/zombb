@@ -46,3 +46,6 @@ end
 
 # Rake for Travis CI
 gem 'rake'
+
+# Codeclimate test reporter
+gem "codeclimate-test-reporter", group: :test, require: nil
