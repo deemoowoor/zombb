@@ -6,3 +6,6 @@ zombb
 [![Test Coverage](https://codeclimate.com/github/deemoowoor/zombb/badges/coverage.svg)](https://codeclimate.com/github/deemoowoor/zombb)
 
 My Rails message board
+
+
+
