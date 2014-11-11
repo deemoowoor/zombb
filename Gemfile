@@ -3,12 +3,6 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-
-# Use PostgreSQL as the database for Active Record
-#gem 'pg'
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -31,12 +25,19 @@ gem 'bower-rails'
 
 gem "foreman"
 
+group :development, :test do
+    # Use sqlite3 as the database for Active Record
+    gem 'sqlite3', group :test, :development
+end
+
 group :production, :staging do
-  gem "rails_12factor"
-  gem "rails_stdout_logging"
-  gem "rails_serve_static_assets"
-  # Use unicorn as the app server
-  # gem 'unicorn'
+    # Use PostgreSQL as the database for Active Record
+    gem 'pg'
+    gem "rails_12factor"
+    gem "rails_stdout_logging"
+    gem "rails_serve_static_assets"
+    # Use unicorn as the app server
+    # gem 'unicorn'
 end
 
 group :doc do
