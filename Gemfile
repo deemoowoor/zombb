@@ -29,9 +29,14 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'bower-rails'
 
-group :production do
-    # Use unicorn as the app server
-    # gem 'unicorn'
+gem "foreman"
+
+group :production, :staging do
+  gem "rails_12factor"
+  gem "rails_stdout_logging"
+  gem "rails_serve_static_assets"
+  # Use unicorn as the app server
+  # gem 'unicorn'
 end
 
 group :doc do
