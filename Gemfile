@@ -52,5 +52,5 @@ group :test do
     gem 'rake'
 
     # Codeclimate test reporter
-    gem "codeclimate-test-reporter", group: :test, require: nil
+    gem "codeclimate-test-reporter", require: nil
 end

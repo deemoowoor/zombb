@@ -3,5 +3,6 @@ rvm:
     - 2.0.0
     - 1.9.3
 cache: bundler
-env:
-    CODECLIMATE_REPO_TOKEN=107346c0de2f9a71070a510c22f337898feacbeb52a199fb94d29fd8b8ed134b
+addons:
+    code_climate:
+        repo_token: 107346c0de2f9a71070a510c22f337898feacbeb52a199fb94d29fd8b8ed134b
