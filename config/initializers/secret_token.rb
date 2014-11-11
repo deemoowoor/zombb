@@ -9,5 +9,5 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-secret = Rails.env.production ? ENV['SECRET_TOKEN'] : "devel_token"
+secret = Rails.env.production? ? ENV['SECRET_TOKEN'] : "devel_token"
 Zombb::Application.config.secret_key_base = secret
