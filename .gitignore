@@ -34,3 +34,5 @@ bower.json
 # VIM files
 .*.swp
 *~
+
+/node_modules
