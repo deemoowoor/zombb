@@ -1,29 +1,17 @@
 <h1>Listing posts</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Body</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<div class="button-panel"><%= link_to fa_icon("plus", text: "New Post"), new_post_path, class: "btn btn-success" %></div>
 
-  <tbody>
+<div class="container">
     <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= post.body %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <div class="panel">
+            <div class="panel-heading"><h2><%= post.title %></h2></div>
+            <div class="panel-body"><%= post.body %></div>
+            <div class="button-panel">
+                <%= link_to fa_icon("asterisk", text: 'Show'), post, class: "btn" %>
+                <%= link_to fa_icon("edit", text: 'Edit'), edit_post_path(post), class: "btn" %>
+                <%= link_to fa_icon("remove", text: 'Destroy'), post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn" %></div>
+        </div>
     <% end %>
-  </tbody>
-</table>
+</div>
 
-<br>
-
-<%= link_to 'New Post', new_post_path %>
