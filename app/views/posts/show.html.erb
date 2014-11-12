@@ -3,17 +3,15 @@
 <% end %>
 
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <h1 class="panel-title">
+    <div class="btn-group pull-right">
+        <%= link_to fa_icon("edit", title: 'Edit'), edit_post_path(@post), class: 'btn btn-warning' %>
+        <%= link_to fa_icon("undo", title: 'Back'), posts_path, class: 'btn btn-default' %>
+    </div>
+    <div class="panel-body">
+        <h1>
             <%= @post.title %>
         </h1>
 
-        <div class="btn-group pull-right">
-            <%= link_to fa_icon("edit", title: 'Edit'), edit_post_path(@post), class: 'btn btn-warning' %>
-            <%= link_to fa_icon("undo", title: 'Back'), posts_path, class: 'btn btn-default' %>
-        </div>
-    </div>
-    <div class="panel-body">
         <p>
         <%= markdown(@post.body) %>
         </p>
