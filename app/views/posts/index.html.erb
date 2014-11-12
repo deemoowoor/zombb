@@ -6,7 +6,7 @@
     <% @posts.each do |post| %>
         <div class="panel">
             <div class="panel-heading"><h2><%= post.title %></h2></div>
-            <div class="panel-body"><%= post.body %></div>
+            <div class="panel-body"><%= markdown(post.body) %></div>
             <div class="button-panel">
                 <%= link_to fa_icon("asterisk", text: 'Show'), post, class: "btn" %>
                 <%= link_to fa_icon("edit", text: 'Edit'), edit_post_path(post), class: "btn" %>
