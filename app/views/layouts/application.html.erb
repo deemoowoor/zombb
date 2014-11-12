@@ -2,13 +2,30 @@
 <html>
 <head>
   <title>Zombb</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <link href='http://fonts.googleapis.com/css?family=Dosis|Josefin+Slab:400,700|Ultra' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+    <header class="nav navbar-static-top" role="banner" id="top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand">ZombieBB</a>
+            </div>
+            <nav role="navigation">
+                <ul class="nav navbar-nav">
+                    <li><%= link_to fa_icon("list", text: "Read posts"), posts_path, class: "btn btn-default" %></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="background">
+        <div class="container">
 
-<%= yield %>
+            <%= yield %>
 
+        </div>
+    </div>
 </body>
 </html>

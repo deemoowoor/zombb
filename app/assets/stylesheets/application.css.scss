@@ -8,8 +8,13 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
- *= require_tree .
  */
-@import "bootstrap-sass-official/assets/stylesheets/bootstrap-sprockets";
-@import "bootstrap-sass-official/assets/stylesheets/bootstrap";
+@import "bootswatch/darkly/variables";
+@import "bootstrap";
+@import "font-awesome";
+
+// And finally bootswatch style itself
+@import "bootswatch/darkly/bootswatch";
+
+// Whatever application styles you have go last
+@import "base";

@@ -1,6 +1,6 @@
-<%= form_for(@post) do |f| %>
+<%= form_for @post, :html => {:class => "form-horizontal", :role => "form"} do |f| %>
   <% if @post.errors.any? %>
-    <div id="error_explanation">
+    <div class="has-feedback alert alert-error">
       <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
       <ul>
@@ -11,15 +11,21 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+  <div class="form-group">
+      <%= f.label :title, :class => "col-sm-1 control-label", :for => "title" %>
+      <div class="col-sm-11">
+          <%= f.text_field :title, :class => "form-control input-xlarge" %>
+      </div>
   </div>
-  <div class="field">
-    <%= f.label :body %><br>
-    <%= f.text_area :body %>
+  <div class="form-group">
+      <%= f.label :body, :class => "col-sm-1 control-label", :for => "body" %>
+      <div class="col-sm-11">
+          <%= f.text_area :body, :class => "form-control input-large", :rows => 20 %>
+      </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+      <div class="col-sm-offset-1 col-sm-11">
+          <%= f.submit :class => "btn btn-success" %>
+      </div>
   </div>
 <% end %>

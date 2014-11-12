@@ -1,14 +1,22 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+    <p id="notice" class="alert alert-info"><i class="fa fa-info-circle"></i> <%= notice %></p>
+<% end %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1 class="panel-title">
+            <%= @post.title %>
+        </h1>
 
-<p>
-  <strong>Body:</strong>
-  <%= @post.body %>
-</p>
+        <div class="btn-group pull-right">
+            <%= link_to fa_icon("edit", title: 'Edit'), edit_post_path(@post), class: 'btn btn-warning' %>
+            <%= link_to fa_icon("undo", title: 'Back'), posts_path, class: 'btn btn-default' %>
+        </div>
+    </div>
+    <div class="panel-body">
+        <p>
+        <%= markdown(@post.body) %>
+        </p>
+    </div>
+</div>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>

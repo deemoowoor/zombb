@@ -23,7 +23,20 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'bower-rails'
 
+# foreman support for Heroku
 gem "foreman"
+
+# Font Awesome gem
+gem "font-awesome-rails"
+
+# Bootstrap SASS
+gem "bootstrap-sass"
+
+# Theme management
+gem "bootswatch-rails"
+
+# Redcarpet Markdown rendering support for post text
+gem "redcarpet"
 
 group :development, :test do
     # Use sqlite3 as the database for Active Record
