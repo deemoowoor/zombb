@@ -1,4 +1,6 @@
 Zombb::Application.routes.draw do
+  resources :post_comments
+
   resources :users
 
   resources :posts
