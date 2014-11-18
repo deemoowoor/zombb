@@ -1,6 +1,12 @@
-<h1>Editing user</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="pull-right btn-group well well-sm">
+            <%= link_to fa_icon('user', title: 'Show'), @user, class: "btn btn-success" %>
+            <%= link_to fa_icon('undo', title: 'Back'), users_path, class: "btn btn-default" %>
+        </div>
+        <h2 class="panel-title">Editing user</h2>
+    </div>
+    <div class="panel-body">
+        <%= render 'form' %>
+    </div>
+</div>

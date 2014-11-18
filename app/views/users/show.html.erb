@@ -1,14 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="pull-right btn-group well well-sm">
+            <%= link_to fa_icon('edit', title: 'Edit'), edit_user_path(@user), class: "btn btn-warning" %>
+            <%= link_to fa_icon('undo', title: 'Back'), users_path, class: "btn btn-default" %>
+        </div>
+        <h2 class="panel-title">Editing user</h2>
+    </div>
+    <div class="panel-body">
+        <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+        <p>
+        <strong>Name:</strong>
+        <%= @user.name %>
+        </p>
 
-<p>
-  <strong>Password:</strong>
-  <%= @user.password %>
-</p>
+        <p>
+        <strong>Email:</strong>
+        <%= @user.email %>
+        </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+    </div>
+</div>
