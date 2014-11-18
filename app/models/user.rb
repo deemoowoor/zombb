@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
     before_save { self.email = email.downcase }
     validates :name, presence: true, length: {maximum: 255}, uniqueness: true
 
@@ -7,9 +11,6 @@ class User < ActiveRecord::Base
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
 
-    has_secure_password
-
-    validates_confirmation_of :password
     validates :password, length: { minimum: 6 }
 
     has_many :posts, dependent: :destroy

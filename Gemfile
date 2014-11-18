@@ -38,6 +38,9 @@ gem "bootswatch-rails"
 # Redcarpet Markdown rendering support for post text
 gem "redcarpet"
 
+# Authentication
+gem "devise"
+
 group :development, :test do
     # Use sqlite3 as the database for Active Record
     gem 'sqlite3'
