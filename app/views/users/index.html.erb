@@ -1,29 +1,35 @@
-<h1>Listing users</h1>
+<div class="well">
+    <%= link_to fa_icon('plus', text: 'New User'), new_user_registration_path, class: "btn btn-success" %>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Password</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1 class="panel-title">Listing users</h1>
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+            </thead>
 
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= user.password %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New User', new_user_path %>
+            <tbody>
+                <% @users.each do |user| %>
+                    <tr>
+                        <td><%= user.name %></td>
+                        <td><%= user.email %></td>
+                        <td>
+                            <div class="btn-group">
+                                <%= link_to fa_icon('user', title: 'Show'), user, class: "btn btn-default" %>
+                                <%= link_to fa_icon('edit', title: 'Edit'), edit_user_path(user), class: "btn btn-warning" %>
+                                <%= link_to fa_icon('remove', title: 'Destroy'), user, method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } %></div>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

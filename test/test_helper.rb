@@ -8,6 +8,9 @@ require 'rails/test_help'
 class ActiveSupport::TestCase
   ActiveRecord::Migration.check_pending!
 
+  # Make Devise' test helpers available, like sign_in and sign_out
+  #include Devise::TestHelpers
+
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   #
   # Note: You'll currently still have to declare fixtures explicitly in integration tests
