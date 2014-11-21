@@ -41,9 +41,18 @@ gem "redcarpet"
 # Authentication
 gem "devise"
 
+# Use ActiveModel has_secure_password
+gem 'bcrypt-ruby', '~> 3.1.2'
+
+# Use Capistrano for deployment
+# gem 'capistrano', group: :development
+
 group :development, :test do
     # Use sqlite3 as the database for Active Record
     gem 'sqlite3'
+
+    # Use debugger
+    gem 'debugger', group: [:development, :test]
 end
 
 group :production, :staging do
@@ -61,16 +70,8 @@ group :doc do
     gem 'sdoc', require: false
 end
 
-# Use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.1.2'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
 group :test do
+
     # Rake for Travis CI
     gem 'rake'
 

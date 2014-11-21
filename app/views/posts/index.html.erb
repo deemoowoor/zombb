@@ -1,6 +1,5 @@
 <h1>Listing posts</h1>
 
-
 <div class="well"><%= link_to fa_icon("plus", text: "New Post"), new_post_path, class: "btn btn-success" %></div>
 
 <% @posts.each do |post| %>
@@ -11,7 +10,7 @@
                 <%= link_to fa_icon("edit", title: "Edit"), edit_post_path(post), class: "btn btn-warning" %>
                 <%= link_to fa_icon("remove", title: "Delete"), post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
             </div>
-            <h2 class="panel-title"><%= link_to post.title, post %> <span class="badge"><%#post.comments.length %></span></h2>
+            <h2 class="panel-title"><%= link_to post.title, post %> <span class="badge"><%# post.post_comments.length %></span></h2>
         </div>
         <div class="panel-body">
             <div class="body">

@@ -2,60 +2,47 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
     setup do
-        @user = users(:one)
+        @user = users(:reader)
         @user.password = 'testtesttest'
+
+        @admin = users(:admin)
+        #@admin.password = 'testtesttest'
+
+        request.env['HTTP_REFERER'] = '/'
     end
 
     teardown do
+        sign_out @admin
+        sign_out @user
         @user.delete
     end
 
-    test "should get index" do
+    test "should get index when admin" do
+        sign_in @admin
         get :index
         assert_response :success
         assert_not_nil assigns(:users)
     end
 
-    test "should get new" do
-        get :new
-        assert_response :success
-    end
-
-    test "should create user" do
-        assert_difference('User.count') do
-            post :create, user: { name: 'uniquename1',
-                                  password: @user.password,
-                                  password_confirmation: @user.password,
-                                  email: 'uniqueemail@email.noc' }
-        end
-
-        assert_redirected_to user_path(assigns(:user))
-    end
-
-    test "should show user" do
+    test "should show user when admin" do
+        sign_in @admin
         get :show, id: @user
         assert_response :success
     end
 
-    test "should get edit" do
-        get :edit, id: @user
+    test "should show user when same user" do
+        sign_in @user
+        get :show, id: @user
         assert_response :success
     end
 
-    test "should update user" do
-        patch :update, id: @user, user: { name: @user.name,
-                                          password: @user.password,
-                                          password_confirmation: @user.password,
-                                          email: @user.email }
-
-        assert_redirected_to user_path(assigns(:user))
+    test "should redirect to login from index when not signed in" do
+        get :index
+        assert_redirected_to new_user_session_path
     end
 
-    test "should destroy user" do
-        assert_difference('User.count', -1) do
-            delete :destroy, id: @user
-        end
-
-        assert_redirected_to users_path
+    test "should redirect to login from show when not signed in" do
+        get :show, id: @user
+        assert_redirected_to new_user_session_path
     end
 end

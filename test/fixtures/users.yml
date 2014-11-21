@@ -1,11 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString1
-  email: test1@test.com
-  password_digest: $2a$10$8uCZ9wCTsFoqa0aIfpssne4qtchcpqhepdU5WylZwh4GBAkgFWEYe
+reader:
+  name: ReaderRobin
+  email: robin@reader.com
+  password_digest: <%= Devise.bcrypt(User, 'testtesttest') %>
+  role: reader
 
-two:
-  name: MyString2
-  email: test2@test.com
-  password_digest: $2a$10$8uCZ9wCTsFoqa0aIfpssne4qtchcpqhepdU5WylZwh4GBAkgFWEYe
+editor:
+  name: EditorEddie
+  email: eddie@editor.com
+  password_digest: <%= Devise.bcrypt(User, 'testtesttest') %>
+  role: editor
+
+admin:
+  name: AdminAda
+  email: ada@administrator.com
+  password_digest: <%= Devise.bcrypt(User, 'testtesttest') %>
+  role: admin
