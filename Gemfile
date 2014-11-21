@@ -75,9 +75,6 @@ group :test do
     # Rake for Travis CI
     gem 'rake'
 
-    gem 'rspec'
-    gem 'rspec-rails', "~> 2.0"
-
     # Codeclimate test reporter
     gem "codeclimate-test-reporter", require: nil
 end
