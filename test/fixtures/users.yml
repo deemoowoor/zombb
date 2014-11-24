@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+reader:
+  name: ReaderRobin
+  email: robin@reader.com
+  password_digest: <%= Devise.bcrypt(User, 'testtesttest') %>
+  role: reader
+
+editor:
+  name: EditorEddie
+  email: eddie@editor.com
+  password_digest: <%= Devise.bcrypt(User, 'testtesttest') %>
+  role: editor
+
+admin:
+  name: AdminAda
+  email: ada@administrator.com
+  password_digest: <%= Devise.bcrypt(User, 'testtesttest') %>
+  role: admin

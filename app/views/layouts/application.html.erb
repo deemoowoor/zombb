@@ -11,21 +11,34 @@
     <header class="nav navbar-static-top" role="banner" id="top">
         <div class="container">
             <div class="navbar-header">
-                <a href="/" class="navbar-brand">ZombieBB</a>
+                <a href="/" class="navbar-brand">ZomBB</a>
             </div>
             <nav role="navigation">
                 <ul class="nav navbar-nav">
-                    <li><%= link_to fa_icon("list", text: "Read posts"), posts_path, class: "btn btn-default" %></li>
+                    <li><%= link_to fa_icon("list", text: "Read posts"), posts_path, class: "text-default" %></li>
+                    <% if user_signed_in? and current_user.admin? %>
+                        <li><%= link_to fa_icon("users", text: "Users"), users_path, class: "text-default" %></li>
+                    <% end %>
                 </ul>
             </nav>
-        </div>
-    </header>
-    <div class="background">
-        <div class="container">
+            <nav role="navigation" class="auth pull-right">
+                <ul class="nav navbar-nav">
+                    <% if user_signed_in? %>
+                        <li><%= link_to fa_icon("user", text: current_user.name), user_path(current_user) %></li>
+                        <li><%= link_to fa_icon("sign-out", text: "Log out"), destroy_user_session_path, :method => :delete %></li>
+                    <% else %>
+                        <li><%= link_to fa_icon("sign-in", text: "Log in"), new_user_session_path, class: "text-default" %></li>
+                    <% end %>
+                </div>
+            </div>
+        </header>
+        <div class="background">
+            <div class="container">
+                <%= render partial: "shared/flash_messages", flash: flash %>
 
-            <%= yield %>
+                <%= yield %>
 
+            </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>

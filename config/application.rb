@@ -39,5 +39,16 @@ module Zombb
     end)
     # config/environments/production.rb
     config.assets.compile = true
+
+    # Don't generate empty CSS and JS with generators
+    config.generators do |g|
+        g.orm               :active_record
+        g.template_engine   :erb
+        g.test_framework    :test_unit, fixture: false
+        g.stylesheets       false
+        g.javascripts       false
+    end
+
+    config.i18n.enforce_available_locales = false
   end
 end

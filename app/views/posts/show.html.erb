@@ -1,20 +1,30 @@
 <% if notice %>
     <p id="notice" class="alert alert-info"><i class="fa fa-info-circle"></i> <%= notice %></p>
 <% end %>
-
+<div class="well">
+    <%= link_to fa_icon("edit", text: 'Edit'), edit_post_path(@post), class: 'btn btn-warning' %>
+    <%= link_to fa_icon("undo", text: 'Back'), posts_path, class: 'btn btn-default' %>
+</div>
 <div class="panel panel-default">
-    <div class="btn-group pull-right">
-        <%= link_to fa_icon("edit", title: 'Edit'), edit_post_path(@post), class: 'btn btn-warning' %>
-        <%= link_to fa_icon("undo", title: 'Back'), posts_path, class: 'btn btn-default' %>
-    </div>
     <div class="panel-body">
         <h1>
             <%= @post.title %>
         </h1>
 
         <p>
-        <%= markdown(@post.body) %>
+            <%= markdown(@post.body) %>
         </p>
+
+        <section class="comments well" role="comments">
+            <% unless @post.post_comments.length == 0 %>
+                <h2>Comments</h2>
+                <% render @post.post_comments %>
+            <% end %>
+
+            <h2>Add comments</h2>
+
+            <% render "post_comments/form" %>
+
+        </section>
     </div>
 </div>
-

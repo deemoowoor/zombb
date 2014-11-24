@@ -1,0 +1,19 @@
+<div class="well">
+    <%= link_to fa_icon('edit', text: 'Edit'), edit_user_registration_path, class: "btn btn-warning" %>
+    <%= link_to fa_icon('undo', text: 'Back'), users_path, class: "btn btn-default" %>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+
+        <h2 class="panel-title"><%= @user.name %></h2>
+    </div>
+    <div class="panel-body">
+        <p id="notice"><%= notice %></p>
+
+        <strong>Email:</strong>
+        <%= @user.email %>
+        </p>
+
+    </div>
+</div>
