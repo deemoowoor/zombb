@@ -10,12 +10,15 @@
                 <%= link_to fa_icon("edit", title: "Edit"), edit_post_path(post), class: "btn btn-warning" %>
                 <%= link_to fa_icon("remove", title: "Delete"), post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
             </div>
-            <h2 class="panel-title"><%= link_to post.title, post %> <span class="badge"><%# post.post_comments.length %></span></h2>
+            <h2 class="panel-title"><%= link_to post.title, post %></h2>
         </div>
         <div class="panel-body">
             <div class="body">
                 <%= markdown(post.body) %>
             </div>
+        </div>
+        <div class="panel-footer">
+            <%= link_to fa_icon("comment", text: post.post_comments.length.to_s + " comments"), post %>
         </div>
     </div>
 <% end %>

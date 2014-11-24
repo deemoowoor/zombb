@@ -1,25 +1,25 @@
-<%= form_for(@post_comment) do |f| %>
-  <% if @post_comment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post_comment.errors.count, "error") %> prohibited this post_comment from being saved:</h2>
+<%= form_for([@post, @post.post_comments.build]) do |f| %>
+    <% if @post.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@post.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
-      <ul>
-      <% @post_comment.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+            <ul>
+                <% @post.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div class="form-group">
+        <%= f.label :text, :class => "col-sm-2" %>
+        <div class="col-sm-10">
+            <%= f.text_field :text %>
+        </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :text %><br>
-    <%= f.text_field :text %>
-  </div>
-  <div class="field">
-    <%= f.label :timestamp %><br>
-    <%= f.datetime_select :timestamp %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="form_group">
+        <div class="col-sm-offset-2 col-sm-11">
+            <%= f.submit :class => "btn btn-success" %>
+        </div>
+    </div>
 <% end %>

@@ -1,28 +1,14 @@
 class PostCommentsController < ApplicationController
-    before_action :authenticate_user!, only: [:new, :create, :update, :destroy]
-    before_action :set_post_comment, only: [:show, :edit, :update, :destroy]
-
-    # GET /post_comments
-    # GET /post_comments.json
-    def index
-        @post_comments = PostComment.all
-    end
+    before_action :authenticate_user!, except: [:show]
+    before_action :set_post_and_comment, only: [:edit, :update, :destroy]
 
     # GET /post_comments/1
     # GET /post_comments/1.json
     def show
     end
 
-    # GET /post_comments/new
-    def new
-        @post_comment = PostComment.new
-    end
-
     # GET /post_comments/1/edit
     def edit
-        unless @post_comment.user == current_user
-            redirect_to :back, :alert => 'Access denied.'
-        end
     end
 
     # POST /post_comments
@@ -32,7 +18,8 @@ class PostCommentsController < ApplicationController
 
         respond_to do |format|
             if @post_comment.save
-                format.html { redirect_to @post_comment, notice: 'Post comment was successfully created.' }
+                format.html { redirect_to post_path(@post),
+                              notice: 'Post comment was successfully created.' }
                 format.json { render action: 'show', status: :created, location: @post_comment }
             else
                 format.html { render action: 'new' }
@@ -44,9 +31,16 @@ class PostCommentsController < ApplicationController
     # PATCH/PUT /post_comments/1
     # PATCH/PUT /post_comments/1.json
     def update
+        unless current_user.admin?
+            unless @post_comment.user == current_user
+                redirect_to_back_or_default :alert => 'Access denied.'
+            end
+        end
+
         respond_to do |format|
             if @post_comment.update(post_comment_params)
-                format.html { redirect_to @post_comment, notice: 'Post comment was successfully updated.' }
+                format.html { redirect_to @post_comment,
+                              notice: 'Post comment was successfully updated.' }
                 format.json { head :no_content }
             else
                 format.html { render action: 'edit' }
@@ -66,9 +60,11 @@ class PostCommentsController < ApplicationController
     end
 
     private
+
     # Use callbacks to share common setup or constraints between actions.
-    def set_post_comment
-        @post_comment = PostComment.find(params[:id])
+    def set_post_and_comment
+        @post = Post.find(params[:post_id])
+        @post_comment = @post.post_comments.find(params[:id])
     end
 
     def editor_only
@@ -79,6 +75,6 @@ class PostCommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_comment_params
-        params.require(:post_comment).permit(:text, :timestamp)
+        params.require(:post_comment).permit(:text)
     end
 end

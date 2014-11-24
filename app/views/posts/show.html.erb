@@ -12,7 +12,19 @@
         </h1>
 
         <p>
-        <%= markdown(@post.body) %>
+            <%= markdown(@post.body) %>
         </p>
+
+        <section class="comments well" role="comments">
+            <% unless @post.post_comments.length == 0 %>
+                <h2>Comments</h2>
+                <% render @post.post_comments %>
+            <% end %>
+
+            <h2>Add comments</h2>
+
+            <% render "post_comments/form" %>
+
+        </section>
     </div>
 </div>

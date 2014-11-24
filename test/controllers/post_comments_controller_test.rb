@@ -5,20 +5,10 @@ class PostCommentsControllerTest < ActionController::TestCase
     @post_comment = post_comments(:one)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:post_comments)
-  end
-
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
   test "should create post_comment" do
     assert_difference('PostComment.count') do
-      post :create, post_comment: { text: @post_comment.text, timestamp: @post_comment.timestamp }
+      post :create, post_comment: { text: @post_comment.text, timestamp: @post_comment.timestamp,
+                                    }
     end
 
     assert_redirected_to post_comment_path(assigns(:post_comment))
