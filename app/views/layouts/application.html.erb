@@ -16,7 +16,7 @@
             <nav role="navigation">
                 <ul class="nav navbar-nav">
                     <li><%= link_to fa_icon("list", text: "Read posts"), posts_path, class: "text-default" %></li>
-                    <% if current_user.admin? %>
+                    <% if user_signed_in? and current_user.admin? %>
                         <li><%= link_to fa_icon("users", text: "Users"), users_path, class: "text-default" %></li>
                     <% end %>
                 </ul>

@@ -3,8 +3,6 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
     setup do
         @user = users(:reader)
-        @user.password = 'testtesttest'
-
         @admin = users(:admin)
         #@admin.password = 'testtesttest'
 
@@ -31,6 +29,8 @@ class UsersControllerTest < ActionController::TestCase
     end
 
     test "should show user when same user" do
+        sign_out @user
+        sign_out @admin
         sign_in @user
         get :show, id: @user
         assert_response :success

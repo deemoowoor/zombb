@@ -3,7 +3,9 @@
 one:
   title: MyString
   body: MyText
+  user: reader
 
 two:
   title: MyString
   body: MyText
+  user: editor
