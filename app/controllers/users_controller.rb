@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
     before_action :authenticate_user!
     before_action :set_user, only: [:show, :edit, :update, :destroy]
-    #before_action :admin_only, :except => [:show]
+    before_action :admin_only, :except => [:show]
 
     # GET /users
     # GET /users.json
@@ -19,15 +19,21 @@ class UsersController < ApplicationController
         end
     end
 
-    private
-
-    def redirect_to_back_or_default(default = root_url, alert = nil)
-        if request.env["HTTP_REFERER"].present? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
-            redirect_to :back, :alert => alert
-        else
-            redirect_to default, :alert => alert
+    # PATCH/PUT /posts/1
+    # PATCH/PUT /posts/1.json
+    def update
+        respond_to do |format|
+            if @user.update(post_params)
+                format.html { redirect_to @post, notice: 'User was successfully updated.' }
+                format.json { head :no_content }
+            else
+                format.html { render action: 'edit' }
+                format.json { render json: @post.errors, status: :unprocessable_entity }
+            end
         end
     end
+
+    private
 
     # Use callbacks to share common setup or constraints between actions.
     def set_user
