@@ -9,10 +9,15 @@
     <div class="panel-body">
         <h1>
             <%= @post.title %>
+            <% if @post.user %>
+                <small><i>by</i> <%= @post.user.try(:name) %></small>
+            <% else %>
+                <small><i>by Anonymous zombie</i>
+            <% end %>
         </h1>
 
         <p>
-            <%= markdown(@post.body) %>
+        <%= markdown(@post.body) %>
         </p>
 
         <section class="comments well" role="comments">
