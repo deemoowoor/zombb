@@ -5,10 +5,5 @@
   <%= @post_comment.text %>
 </p>
 
-<p>
-  <strong>Timestamp:</strong>
-  <%= @post_comment.timestamp %>
-</p>
-
 <%= link_to 'Edit', edit_post_comment_path(@post_comment) %> |
 <%= link_to 'Back', post_comments_path %>

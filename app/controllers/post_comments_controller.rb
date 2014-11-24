@@ -14,7 +14,10 @@ class PostCommentsController < ApplicationController
     # POST /post_comments
     # POST /post_comments.json
     def create
+        @post = Post.find(params[:post_id])
         @post_comment = PostComment.new(post_comment_params)
+        @post_comment.post = @post
+        @post_comment.user = current_user
 
         respond_to do |format|
             if @post_comment.save
@@ -54,7 +57,7 @@ class PostCommentsController < ApplicationController
     def destroy
         @post_comment.destroy
         respond_to do |format|
-            format.html { redirect_to post_comments_url }
+            format.html { redirect_to @post }
             format.json { head :no_content }
         end
     end

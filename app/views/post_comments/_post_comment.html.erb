@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-sm-2">
+        <div class="well well-sm">
+            <div class="user">
+                <% if post_comment.user %>
+                    <%= post_comment.user.try(:name) %>
+                <% else %>
+                    Anonymous
+                <% end %>
+            </div>
+            <% if post_comment.user == current_user %>
+                <div class="btn-group">
+                    <%= link_to fa_icon("edit", title: "Edit"),
+                        edit_post_post_comment_path(@post, post_comment),
+                        class: "btn btn-sm btn-success" %>
+                    <%= link_to fa_icon("remove", title: "Delete"),
+                        url_for([@post, post_comment]), method: :delete,
+                        data: {confirm: 'Are you sure?'}, class: "btn btn-sm btn-danger" %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+    <div class="col-sm-10">
+        <div class="panel panel-default comment">
+            <div class="panel-body">
+                <%= markdown(post_comment.text) %>
+            </div>
+        </div>
+    </div>
+</div>
