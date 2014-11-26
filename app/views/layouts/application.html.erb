@@ -5,6 +5,10 @@
   <link href='http://fonts.googleapis.com/css?family=Dosis|Josefin+Slab:400,700|Ultra' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -15,6 +19,7 @@
             </div>
             <nav role="navigation">
                 <ul class="nav navbar-nav">
+                    <li><%= link_to fa_icon("magic", text: "Angular app"), zombie_path, class: "text-default" %></li>
                     <li><%= link_to fa_icon("list", text: "Read posts"), root_path, class: "text-default" %></li>
                     <% if user_signed_in? and current_user.admin? %>
                         <li><%= link_to fa_icon("users", text: "Users"), users_path, class: "text-default" %></li>

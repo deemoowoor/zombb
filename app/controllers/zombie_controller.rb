@@ -1,0 +1,3 @@
+class ZombieController < ApplicationController
+
+end
