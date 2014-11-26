@@ -1,24 +1,18 @@
-<h1>Listing posts</h1>
+<h1>Listing topics</h1>
 
-<div class="well"><%= link_to fa_icon("plus", text: "New Post"), new_post_path, class: "btn btn-success" %></div>
+<div class="well"><%= link_to fa_icon("plus", text: "New topic"), new_post_path, class: "btn btn-success" %></div>
 
+<div class="list-group">
 <% @posts.each do |post| %>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <div class="pull-right btn-group well well-sm">
-                <%= link_to fa_icon("asterisk", title: "Show"), post, class: "btn btn-success" %>
-                <%= link_to fa_icon("edit", title: "Edit"), edit_post_path(post), class: "btn btn-warning" %>
-                <%= link_to fa_icon("remove", title: "Delete"), post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-            </div>
-            <h2 class="panel-title"><%= link_to post.title, post %></h2>
+    <div class="list-group-item">
+        <div class="pull-right btn-group">
+            <%= link_to fa_icon("edit", title: "Edit"), edit_post_path(post), class: "btn btn-warning btn-sm" %>
+            <%= link_to fa_icon("remove", title: "Delete"), post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
         </div>
-        <div class="panel-body">
-            <div class="body">
-                <%= markdown(post.body) %>
-            </div>
-        </div>
-        <div class="panel-footer">
+        <h2 class="list-group-item-heading"><%= link_to post.title, post %></h2>
+        <p class="list-group-item-text">
             <%= link_to fa_icon("comment", text: post.post_comments.length.to_s + " comments"), post %>
-        </div>
+        </p>
     </div>
 <% end %>
+</div>
