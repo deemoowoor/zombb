@@ -44,6 +44,9 @@ gem "devise"
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.2'
 
+# Support for AngularJS CSRF
+gem 'angular_rails_csrf'
+
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 

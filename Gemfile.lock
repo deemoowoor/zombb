@@ -25,6 +25,8 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    angular_rails_csrf (1.0.3)
+      rails (>= 3, < 5)
     arel (4.0.2)
     bcrypt (3.1.9)
     bcrypt-ruby (3.1.5)
@@ -148,6 +150,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  angular_rails_csrf
   bcrypt-ruby (~> 3.1.2)
   bootstrap-sass
   bootswatch-rails
