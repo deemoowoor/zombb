@@ -42,7 +42,7 @@ module Zombb
 
     # Don't generate empty CSS and JS with generators
     config.generators do |g|
-        g.orm               :active_record
+    #    g.orm               :active_record
         g.template_engine   :erb
         g.test_framework    :test_unit, fixture: false
         g.stylesheets       false
@@ -50,5 +50,10 @@ module Zombb
     end
 
     config.i18n.enforce_available_locales = false
+
+    config.action_dispatch.default_headers.merge!({
+        'Access-Control-Allow-Origin' => '*',
+        'Access-Control-Request-Method' => '*'
+    })
   end
 end
