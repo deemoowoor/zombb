@@ -13,7 +13,7 @@ class PostsController < ApplicationController
     # GET /posts/1.json
     def show
         @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
-        @edit = post_params[:edit]
+        @edit = params[:edit]
     end
 
     # GET /posts/new
@@ -77,8 +77,9 @@ class PostsController < ApplicationController
             redirect_to_back_or_default alert: 'Access denied.'
         end
     end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-        params.require(:post).permit(:title, :body, :edit)
+        params.require(:post).permit(:title, :body)
     end
 end
