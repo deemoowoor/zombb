@@ -1,11 +1,12 @@
 class PostCommentsController < ApplicationController
     before_action :authenticate_user!, except: [:show]
-    before_action :set_post_and_comment, only: [:edit, :update, :destroy]
+    before_action :set_post_and_comment, except: [:index, :create]
     before_action :prepare_markdown, only: [:show, :edit, :update, :create]
 
     # GET /post_comments/1
     # GET /post_comments/1.json
     def show
+        @edit = params[:edit]
     end
 
     # GET /post_comments/1/edit
@@ -24,7 +25,7 @@ class PostCommentsController < ApplicationController
             if @post_comment.save
                 format.html { redirect_to post_path(@post),
                               notice: 'Post comment was successfully created.' }
-                format.json { render action: 'show', status: :created, location: @post_comment }
+                format.json { render action: 'show', status: :created, location: post_post_comment_url(@post, @post_comment) }
             else
                 format.html { render action: 'new' }
                 format.json { render json: @post_comment.errors, status: :unprocessable_entity }

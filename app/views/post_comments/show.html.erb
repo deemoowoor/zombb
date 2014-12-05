@@ -5,5 +5,5 @@
   <%= @post_comment.text %>
 </p>
 
-<%= link_to 'Edit', edit_post_comment_path(@post_comment) %> |
-<%= link_to 'Back', post_comments_path %>
+<%= link_to 'Edit', edit_post_post_comment_path(@post, @post_comment) %> |
+<%= link_to 'Back', post_post_comments_path(@post)%>
