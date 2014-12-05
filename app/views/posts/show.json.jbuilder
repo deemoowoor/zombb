@@ -1,4 +1,4 @@
-json.extract! @post, :id, :title, :created_at, :updated_at
+json.extract! @post, :id, :title, :user, :created_at, :updated_at
 unless @edit
     json.body @markdown.render(@post.body)
     json.post_comments @post.post_comments do |comment|
