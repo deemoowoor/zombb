@@ -1,6 +1,7 @@
 class PostCommentsController < ApplicationController
     before_action :authenticate_user!, except: [:show]
     before_action :set_post_and_comment, only: [:edit, :update, :destroy]
+    before_action :prepare_markdown, only: [:show, :edit, :update, :create]
 
     # GET /post_comments/1
     # GET /post_comments/1.json
@@ -64,10 +65,13 @@ class PostCommentsController < ApplicationController
 
     private
 
-    # Use callbacks to share common setup or constraints between actions.
     def set_post_and_comment
         @post = Post.find(params[:post_id])
         @post_comment = @post.post_comments.find(params[:id])
+    end
+
+    def prepare_markdown
+        @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
     end
 
     def editor_only
