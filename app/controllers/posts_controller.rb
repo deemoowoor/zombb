@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
-    before_action :set_post, except: [:create, :index]
+    before_action :set_post, except: [:create, :index, :new]
     before_action :owner_or_admin_only, only: [:edit, :update, :destroy]
     before_action :prepare_markdown, only: [:show, :edit, :update, :create]
 
