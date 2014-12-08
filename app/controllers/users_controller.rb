@@ -12,24 +12,8 @@ class UsersController < ApplicationController
     # GET /users/1
     # GET /users/1.json
     def show
-        unless current_user.admin?
-            unless @user == current_user
-                redirect_to_back_or_default :alert => 'Access denied.'
-            end
-        end
-    end
-
-    # PATCH/PUT /posts/1
-    # PATCH/PUT /posts/1.json
-    def update
-        respond_to do |format|
-            if @user.update(post_params)
-                format.html { redirect_to @post, notice: 'User was successfully updated.' }
-                format.json { head :no_content }
-            else
-                format.html { render action: 'edit' }
-                format.json { render json: @post.errors, status: :unprocessable_entity }
-            end
+        unless current_user.admin? or @user == current_user
+            redirect_to_back_or_default :alert => 'Access denied.'
         end
     end
 
@@ -42,6 +26,12 @@ class UsersController < ApplicationController
 
     def admin_only
         unless current_user.admin?
+            redirect_to_back_or_default :alert => 'Access denied.'
+        end
+    end
+
+    def owner_or_admin_only
+        unless current_user.admin? or current_user == @user
             redirect_to_back_or_default :alert => 'Access denied.'
         end
     end

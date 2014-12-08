@@ -4,7 +4,11 @@ unless @edit
     json.body @markdown.render(@post.body)
     json.post_comments @post.post_comments do |comment|
         json.extract! comment, :id
-        json.user comment.user, :name, :email, :role
+        if comment.user
+            json.user comment.user, :name, :email, :role
+        else
+            json.user nil
+        end
         json.text @markdown.render(comment.text)
     end
 else
