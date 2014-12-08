@@ -1,6 +1,7 @@
 class PostCommentsController < ApplicationController
     before_action :authenticate_user!, except: [:show]
     before_action :set_post_and_comment, except: [:index, :create]
+    before_action :owner_or_admin, only: [:edit, :update, :destroy]
     before_action :prepare_markdown, only: [:show, :edit, :update, :create]
 
     # GET /post_comments/1
@@ -36,12 +37,6 @@ class PostCommentsController < ApplicationController
     # PATCH/PUT /post_comments/1
     # PATCH/PUT /post_comments/1.json
     def update
-        unless current_user.admin?
-            unless @post_comment.user == current_user
-                redirect_to_back_or_default :alert => 'Access denied.'
-            end
-        end
-
         respond_to do |format|
             if @post_comment.update(post_comment_params)
                 format.html { redirect_to @post_comment,
@@ -73,12 +68,6 @@ class PostCommentsController < ApplicationController
 
     def prepare_markdown
         @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
-    end
-
-    def editor_only
-        unless current_user.editor?
-            redirect_to :back, :alert => 'Access denied.'
-        end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

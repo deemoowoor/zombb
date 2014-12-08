@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
     before_action :set_post, except: [:create, :index, :new]
-    before_action :owner_or_admin_only, only: [:edit, :update, :destroy]
+
+    before_action :editor_or_admin, only: [:new, :create]
+    before_action :owner_or_admin, only: [:edit, :update, :destroy]
     before_action :prepare_markdown, only: [:show, :edit, :update, :create]
 
     # GET /posts
@@ -70,16 +72,11 @@ class PostsController < ApplicationController
 
     def set_post
         @post = Post.find(params[:id])
+        @user = @post.user
     end
 
     def prepare_markdown
         @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
-    end
-
-    def owner_or_admin_only
-        unless @post.user == current_user
-            redirect_to_back_or_default alert: 'Access denied.'
-        end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
