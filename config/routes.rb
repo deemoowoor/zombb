@@ -11,4 +11,6 @@ Zombb::Application.routes.draw do
       resources :post_comments
   end
 
+  resources :stats
+
 end
