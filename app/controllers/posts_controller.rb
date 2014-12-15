@@ -32,13 +32,13 @@ class PostsController < ApplicationController
     def create
         @post = Post.new(post_params)
         @post.user = current_user
-        create_object @post, post_params, 'Post'
+        create_object @post, post_params, 'Post', lambda { @post }
     end
 
     # PATCH/PUT /posts/1
     # PATCH/PUT /posts/1.json
     def update
-        update_object @post, post_params, 'Post'
+        update_object @post, post_params, 'Post', lambda { @post }
     end
 
     # DELETE /posts/1

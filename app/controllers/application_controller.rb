@@ -6,12 +6,12 @@ class ApplicationController < ActionController::Base
     # Support for angular-devise
     respond_to :html, :json
 
-    def create_object(object, params, name)
+    def create_object(object, params, name, redirect)
         respond_to do |format|
             if object.save
-                format.html { redirect_to object,
-                              notice: '#{name} was successfully created.' }
-                format.json { render action: 'show', status: :created, location: object }
+                format.html { redirect_to redirect.call(),
+                              notice: "#{name} was successfully created." }
+                format.json { render action: 'show', status: :created, location: redirect.call() }
             else
                 format.html { render action: 'new' }
                 format.json { render json: object.errors, status: :unprocessable_entity }
@@ -19,10 +19,10 @@ class ApplicationController < ActionController::Base
         end
     end
 
-    def update_object(object, params, name)
+    def update_object(object, params, name, redirect)
         respond_to do |format|
             if object.update(params)
-                format.html { redirect_to object, notice: '#{name} was successfully updated.' }
+                format.html { redirect_to redirect.call(), notice: "#{name} was successfully updated." }
                 format.json { head :no_content }
             else
                 format.html { render action: 'edit' }
@@ -54,6 +54,14 @@ class ApplicationController < ActionController::Base
     def admin_only
         unless current_user.admin?
             respond_with_unauthorized
+        end
+    end
+
+    def redirect_to_back_or_default(default = root_url, alert = nil)
+        if request.env["HTTP_REFERER"].present? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
+            redirect_to :back, :alert => alert
+        else
+            redirect_to default, :alert => alert
         end
     end
 end

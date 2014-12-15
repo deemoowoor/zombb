@@ -22,13 +22,16 @@ class PostCommentsController < ApplicationController
         @post_comment.post = @post
         @post_comment.user = current_user
 
-        create_object @post_comment, post_comment_params, 'Comment'
+        create_object @post_comment, post_comment_params, 'Comment',
+            lambda { post_post_comment_url(@post, @post_comment) }
     end
 
     # PATCH/PUT /post_comments/1
     # PATCH/PUT /post_comments/1.json
     def update
-        update_object @post_comment, post_comment_params, 'Comment'
+        update_object @post_comment, post_comment_params, 'Comment',
+            lambda { post_post_comment_url(@post, @post_comment) }
+
     end
 
     # DELETE /post_comments/1
