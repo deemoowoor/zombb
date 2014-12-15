@@ -1,0 +1,25 @@
+<div ng-controller="TopicListCtrl">
+    <h1>Listing topics</h1>
+
+    <div class="well">
+        <a ng-if="Authorize.condition.editor()" href="#/topics/new" class="btn btn-success"><i class="fa fa-plus"></i> New topic</a>
+    </div>
+
+    <div class="list-group">
+        <div class="list-group-item" ng-repeat="(id, post) in posts">
+            <div class="pull-right btn-group" ng-show="Authorize.condition.owner(post.user)">
+                <a href="#/topics/{{post.id}}/edit"
+                    class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Edit</a>
+                <a ng-click="deleteTopic(post)"
+                    class="btn btn-danger btn-sm pointer"><i class="fa fa-remove"></i> Delete</a>
+            </div>
+            <h2 class="list-group-item-heading">
+                <a href="#/topics/{{post.id}}">{{ post.title }}</a>
+                <small>by {{ post.user.name || "Anonymous" }}</small></h2>
+            <p class="list-group-item-text">
+            <a href="#/topics/{{post.id}}"><i class="fa fa-comment"></i>
+                {{ post.post_comments.length }} comments</a>
+            </p>
+        </div>
+    </div>
+</div>
