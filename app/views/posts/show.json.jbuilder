@@ -1,5 +1,10 @@
 json.extract! @post, :id, :title, :created_at, :updated_at
-json.user @post.user, :id, :name, :email, :role
+
+if @post.user
+    json.user @post.user, :id, :name, :email, :role
+else
+    json.user nil
+end
 
 unless @edit
     json.body @markdown.render(@post.body)
