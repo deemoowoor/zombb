@@ -6,6 +6,19 @@ class ApplicationController < ActionController::Base
     # Support for angular-devise
     respond_to :html, :json
 
+    def create_object(object, params, name)
+        respond_to do |format|
+            if object.save
+                format.html { redirect_to object,
+                              notice: '#{name} was successfully created.' }
+                format.json { render action: 'show', status: :created, location: object }
+            else
+                format.html { render action: 'new' }
+                format.json { render json: object.errors, status: :unprocessable_entity }
+            end
+        end
+    end
+
     def update_object(object, params, name)
         respond_to do |format|
             if object.update(params)

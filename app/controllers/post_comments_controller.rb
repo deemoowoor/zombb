@@ -22,22 +22,13 @@ class PostCommentsController < ApplicationController
         @post_comment.post = @post
         @post_comment.user = current_user
 
-        respond_to do |format|
-            if @post_comment.save
-                format.html { redirect_to post_path(@post),
-                              notice: 'Post comment was successfully created.' }
-                format.json { render action: 'show', status: :created, location: post_post_comment_url(@post, @post_comment) }
-            else
-                format.html { render action: 'new' }
-                format.json { render json: @post_comment.errors, status: :unprocessable_entity }
-            end
-        end
+        create_object @post_comment, post_comment_params, 'Comment'
     end
 
     # PATCH/PUT /post_comments/1
     # PATCH/PUT /post_comments/1.json
     def update
-        update_object @post_comment, post_comment_params, 'Post comment'
+        update_object @post_comment, post_comment_params, 'Comment'
     end
 
     # DELETE /post_comments/1
