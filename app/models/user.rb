@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
     devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :trackable, :validatable
 
-    validates :name, presence: true, length: {maximum: 255}, uniqueness: true
+    validates :name, length: {maximum: 255}, uniqueness: true
     validates :password, length: { minimum: 6 }
 
     has_many :posts, dependent: :destroy
@@ -27,5 +27,16 @@ class User < ActiveRecord::Base
 
     def reader?
         self.role == Reader
+    end
+
+    protected
+
+    # XXX: dirty hack
+    def password_digest(password=nil)
+        if password
+            return Devise.bcrypt(self.class, password)
+        else
+            return 'nil'
+        end
     end
 end

@@ -45,4 +45,9 @@ class UsersControllerTest < ActionController::TestCase
         get :show, id: @user
         assert_redirected_to new_user_session_path
     end
+
+    test 'should respond with unauthorized when index is accessed by non admin' do
+        get :index, format: 'json'
+        assert_response :unauthorized
+    end
 end

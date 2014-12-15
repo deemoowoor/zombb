@@ -3,7 +3,9 @@ require 'test_helper'
 class PostsControllerTest < ActionController::TestCase
     setup do
         @post = posts(:one)
-        @user = users(:reader)
+        @posttwo = posts(:two)
+        @reader = users(:reader)
+        @user = users(:editor)
     end
 
     test "should get index" do
@@ -33,24 +35,42 @@ class PostsControllerTest < ActionController::TestCase
         assert_response :success
     end
 
-    test "should get edit" do
+    test "should get edit by the owner" do
         sign_in @user
-        get :edit, id: @post
+        get :edit, id: @posttwo
         assert_response :success
     end
 
-    test "should update post" do
+    test "should update post by the owner" do
         sign_in @user
-        patch :update, id: @post, post: { body: @post.body, title: @post.title }
+        patch :update, id: @posttwo, post: { body: @posttwo.body, title: @posttwo.title }
         assert_redirected_to post_path(assigns(:post))
     end
 
-    test "should destroy post" do
-        sign_in @user
+    test "should destroy post by the owner" do
+        sign_in @reader
         assert_difference('Post.count', -1) do
             delete :destroy, id: @post
         end
 
         assert_redirected_to posts_path
+    end
+
+    test 'should respond with unauthorized when creating via JSON' do
+        sign_in @reader
+        post :create, format: 'json', post: { body: @post.body, title: @post.title }
+        assert_response :unauthorized
+    end
+
+    test 'should respond with unauthorized when updating via JSON' do
+        sign_in @reader
+        patch :update, id: @posttwo, format: 'json', post: { body: @posttwo.body, title: @posttwo.title }
+        assert_response :unauthorized
+    end
+
+    test 'should respond with an error if update fails' do
+        sign_in @reader
+        patch :update, id: @post, format: 'json', post: { body: nil, title: nil }
+        assert_response :success
     end
 end
