@@ -55,4 +55,22 @@ class PostsControllerTest < ActionController::TestCase
 
         assert_redirected_to posts_path
     end
+
+    test 'should respond with unauthorized when creating via JSON' do
+        sign_in @reader
+        post :create, format: 'json', post: { body: @post.body, title: @post.title }
+        assert_response :unauthorized
+    end
+
+    test 'should respond with unauthorized when updating via JSON' do
+        sign_in @reader
+        patch :update, id: @posttwo, format: 'json', post: { body: @posttwo.body, title: @posttwo.title }
+        assert_response :unauthorized
+    end
+
+    test 'should respond with an error if update fails' do
+        sign_in @reader
+        patch :update, id: @post, format: 'json', post: { body: nil, title: nil }
+        assert_response :success
+    end
 end

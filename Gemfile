@@ -80,4 +80,6 @@ group :test do
 
     # Codeclimate test reporter
     gem "codeclimate-test-reporter", require: nil
+
+#    gem 'simplecov', require: false
 end

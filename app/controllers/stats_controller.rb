@@ -4,9 +4,9 @@ class StatsController < ApplicationController
 
     def index
         @stats = {
-            users: User.find(:all).count,
-            posts: Post.find(:all).count,
-            comments: PostComment.find(:all).count,
+            users: User.all.count,
+            posts: Post.all.count,
+            comments: PostComment.all.count,
         }
     end
 end

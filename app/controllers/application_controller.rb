@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
     def respond_with_unauthorized
         respond_to do |format|
             format.html { redirect_to_back_or_default :alert => 'Access denied' }
-            format.json { render 'Unauthorized', status: :unauthorized }
+            format.json { render json: 'Unauthorized', status: :unauthorized }
         end
     end
 
@@ -56,13 +56,4 @@ class ApplicationController < ActionController::Base
             respond_with_unauthorized
         end
     end
-
-    def redirect_to_back_or_default(default = root_url, alert = nil)
-        if request.env["HTTP_REFERER"].present? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
-            redirect_to :back, :alert => alert
-        else
-            redirect_to default, :alert => alert
-        end
-    end
-
 end
