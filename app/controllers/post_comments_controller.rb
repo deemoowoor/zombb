@@ -37,16 +37,7 @@ class PostCommentsController < ApplicationController
     # PATCH/PUT /post_comments/1
     # PATCH/PUT /post_comments/1.json
     def update
-        respond_to do |format|
-            if @post_comment.update(post_comment_params)
-                format.html { redirect_to @post_comment,
-                              notice: 'Post comment was successfully updated.' }
-                format.json { head :no_content }
-            else
-                format.html { render action: 'edit' }
-                format.json { render json: @post_comment.errors, status: :unprocessable_entity }
-            end
-        end
+        update_object @post_comment, post_comment_params, 'Post comment'
     end
 
     # DELETE /post_comments/1

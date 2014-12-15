@@ -6,6 +6,19 @@ class ApplicationController < ActionController::Base
     # Support for angular-devise
     respond_to :html, :json
 
+    def update_object(object, params, name)
+        respond_to do |format|
+            if object.update(params)
+                format.html { redirect_to object, notice: '#{name} was successfully updated.' }
+                format.json { head :no_content }
+            else
+                format.html { render action: 'edit' }
+                format.json { render json: object.errors, status: :unprocessable_entity }
+            end
+        end
+
+    end
+
     def respond_with_unauthorized
         respond_to do |format|
             format.html { redirect_to_back_or_default :alert => 'Access denied' }
