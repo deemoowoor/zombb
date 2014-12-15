@@ -14,12 +14,18 @@ Quick Start
 0. You need Ruby 1.9+ at minimum
 
 1. Install dependencies with
+
     $ bundle install
 
-2. Run server with
+2. Migrate DB
+
+    $ rake db:migrate
+
+3. Run server with
+
     $ rails s
 
-3. Accessible by default at ``http://localhost:3000/``
+4. Accessible by default at ``http://localhost:3000/``
 
 
 Running unittests
